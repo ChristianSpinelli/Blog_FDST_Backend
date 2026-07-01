@@ -4,7 +4,9 @@
   "description": "Backend do Blog escolar criado em Node para a fase 2 do Tech challenge",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "build": "tsc",
+    "start": "node dist/src/server.js"
   },
   "repository": {
     "type": "git",

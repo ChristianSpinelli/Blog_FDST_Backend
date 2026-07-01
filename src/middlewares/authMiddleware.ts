@@ -16,7 +16,7 @@ export const authorizeRoles = (...allowedRoles: string[]) => {
       return;
     }
     
-    //verifica se inclue a rola específica para acessar o serviço correspondente.
+    //verifica se inclue a role específica para acessar o serviço correspondente.
     if (!allowedRoles.includes(req.user.role)) {
       res.status(403).json({ message: 'Acesso negado. Permissão insuficiente.' });
       return;
