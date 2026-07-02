@@ -8,5 +8,6 @@ const userConttoller = new UserController();
 
 router.post('/', authorizeRoles(Perfil.admin), userConttoller.create);
 router.get('/', authorizeRoles(Perfil.admin), userConttoller.list);
+router.get('/:username', authorizeRoles(Perfil.admin), userConttoller.findUserByUsername)
 
 export default router;

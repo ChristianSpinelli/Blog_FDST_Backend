@@ -28,4 +28,16 @@ export class UserController{
             next(error);
         }
     }
+
+    async findUserByUsername(req:Request, res:Response, next:NextFunction): Promise<void>{
+        try{
+            const { username } = req.params;
+
+            const user = await userService.findUserByUsername(username as string);
+
+            res.status(200).json(user);
+        }catch(error){
+            next(error);
+        }
+    }
 }

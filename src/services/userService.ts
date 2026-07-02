@@ -35,4 +35,14 @@ export class UserService{
     async listUsers():Promise<Array<UserResponse>>{
         return await this.userRepository.list();
     }
+
+    async findUserByUsername(username:string):Promise<UserResponse>{
+        const response = await this.userRepository.findByUsername(username);
+
+        if(response === null){
+            throw new Error('Usuário não encontrado.');
+        }
+
+        return response;
+    }
 }

@@ -1,8 +1,8 @@
 import { prisma } from '../config/database'; 
-import { PostRequest } from '../model/post.model';
+import { PostRequest, PostResponse } from '../model/post.model';
 
 export class PostRepository {
-  async create(data: PostRequest) {
+  async create(data: PostRequest): Promise<PostResponse> {
     return await prisma.post.create({
       data: {
         ...data
@@ -10,7 +10,7 @@ export class PostRepository {
     });
   }
 
-  async list(){
+  async list(): Promise<Array<PostResponse>>{
     return await prisma.post.findMany();
   }
 }

@@ -9,13 +9,18 @@ export const errorHandler = (
   console.error('Erro capturado:', error.message);
 
   // erro comum de validação
-  if (error.message.includes('obrigatório') || error.message.includes('não encontrado')) {
+  if (error.message.includes('obrigatório')) {
     res.status(400).json({ error: error.message });
     return;
   }
 
   if(error.message.includes('Unique constraint') && error.message.includes("email")){
     res.status(400).json({ error: "O username informado já existe. Tente novamente." });
+    return;
+  }
+
+  if(error.message.includes('não encontrado')){
+    res.status(404).json({ error: error.message });
     return;
   }
 
