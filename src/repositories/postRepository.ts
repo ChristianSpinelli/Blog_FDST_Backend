@@ -10,4 +10,8 @@ export class PostRepository {
       },
     });
   }
+
+  async list(){
+    return await prisma.post.findMany();
+  }
 }
