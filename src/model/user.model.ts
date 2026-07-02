@@ -1,8 +1,3 @@
-export interface UserPayload {
-  id: number;
-  role: string;
-}
-
 export interface UserRequest {
   name:string;
   username:string;
