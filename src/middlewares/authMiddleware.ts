@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
 import { Perfil } from '../model/perfil.model';
+import { UserPayload } from '../model/user.model';
 
 export const authorizeRoles = (...allowedRoles: string[]): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction): void => {
@@ -20,12 +21,8 @@ export const authorizeRoles = (...allowedRoles: string[]): RequestHandler => {
     const currentUser = (req as any).user as UserPayload;
 
     if (!allowedRoles.includes(currentUser.role)) {
-      let message = 'Acesso negado. Ação permitida apenas para alunos e professores.';
-      
-      if(!allowedRoles.includes(Perfil.aluno)){
-        message = 'Acesso negado. Ação permitida apenas para professores.';
-      }
-
+      let message = 'Acesso negado. Ação não permitida para o perfil informado.';
+    
       res.status(403).json({ message });
       return;
     }

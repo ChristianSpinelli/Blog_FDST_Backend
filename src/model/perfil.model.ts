@@ -1,4 +1,5 @@
 export enum Perfil{
     aluno = 'aluno',
-    professor = 'professor'
+    professor = 'professor',
+    admin = 'admin'
 };

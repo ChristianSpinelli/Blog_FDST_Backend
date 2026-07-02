@@ -14,6 +14,11 @@ export const errorHandler = (
     return;
   }
 
+  if(error.message.includes('Unique constraint') && error.message.includes("email")){
+    res.status(400).json({ error: "O username informado já existe. Tente novamente." });
+    return;
+  }
+
   // erro genérico do servidor
   res.status(500).json({ error: 'Erro interno no servidor.' });
 };

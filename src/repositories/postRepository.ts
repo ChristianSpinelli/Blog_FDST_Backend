@@ -5,8 +5,7 @@ export class PostRepository {
   async create(data: PostRequest) {
     return await prisma.post.create({
       data: {
-        title: data.title,
-        body: data.body,
+        ...data
       },
     });
   }
