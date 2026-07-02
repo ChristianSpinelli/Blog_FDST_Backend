@@ -1,24 +1,25 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction, RequestHandler } from 'express';
 
-export interface AuthenticatedRequest extends Request {
-  user?: {
-    id: number;
-    role: string;
-  };
-}
+export const authorizeRoles = (...allowedRoles: string[]): RequestHandler => {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    const userRole = req.headers['x-user-role'] as string;
+    const userId = req.headers['x-user-id'] as string;
 
-export const authorizeRoles = (...allowedRoles: string[]) => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
-
-    //verifica se está autenticado
-    if (!req.user) {
-      res.status(401).json({ message: 'Não autenticado.' });
+    //passando no lugar do jwt token dois parâmetros no cabeçalho para identificar usuário e role
+    if (!userRole || !userId) {
+      res.status(401).json({ message: 'Acesso negado. Usuário não autenticado.' });
       return;
     }
-    
-    //verifica se inclue a role específica para acessar o serviço correspondente.
-    if (!allowedRoles.includes(req.user.role)) {
-      res.status(403).json({ message: 'Acesso negado. Permissão insuficiente.' });
+
+    (req as any).user = {
+      id: Number(userId),
+      role: userRole.toLowerCase()
+    };
+
+    const currentUser = (req as any).user as UserPayload;
+
+    if (!allowedRoles.includes(currentUser.role)) {
+      res.status(403).json({ message: 'Acesso negado. Apenas professores podem realizar postagens.' });
       return;
     }
 
