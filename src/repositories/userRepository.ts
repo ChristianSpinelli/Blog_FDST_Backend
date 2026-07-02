@@ -7,4 +7,8 @@ export class UserRepository{
             data:{ ...data }
         })
     }
+
+    async list(){
+        return await prisma.user.findMany();
+    }
 }

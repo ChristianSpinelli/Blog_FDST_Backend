@@ -7,5 +7,6 @@ const router = Router();
 const userConttoller = new UserController();
 
 router.post('/', authorizeRoles(Perfil.admin), userConttoller.create);
+router.get('/', authorizeRoles(Perfil.admin), userConttoller.list);
 
 export default router;

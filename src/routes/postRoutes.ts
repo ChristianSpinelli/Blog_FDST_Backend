@@ -7,7 +7,7 @@ const router = Router();
 const postController = new PostController();
 
 // Endpoint de Criação de Postagens
-router.post('/', authorizeRoles(Perfil.admin, Perfil.professor), postController.create);
-router.get('/', authorizeRoles(Perfil.admin, Perfil.aluno, Perfil.professor), postController.list);
+router.post('/', authorizeRoles(Perfil.professor), postController.create);
+router.get('/', authorizeRoles(Perfil.aluno, Perfil.professor), postController.list);
 
 export default router;

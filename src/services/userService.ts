@@ -31,4 +31,8 @@ export class UserService{
 
         return await this.userRepository.create(data);
     }
+
+    async listUsers():Promise<Array<UserResponse>>{
+        return await this.userRepository.list();
+    }
 }

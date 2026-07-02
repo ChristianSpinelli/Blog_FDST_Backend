@@ -18,4 +18,14 @@ export class UserController{
             next(error);
         }
     }
+
+    async list(req:Request, res:Response, next:NextFunction): Promise<void>{
+        try{
+            const users = await userService.listUsers();
+
+            res.status(200).json(users);
+        }catch(error){
+            next(error);
+        }
+    }
 }
