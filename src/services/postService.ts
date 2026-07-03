@@ -20,7 +20,17 @@ export class PostService {
     return await this.postRepository.create(data);
   }
 
-  async listPost(): Promise<Array<PostResponse>>{
+  async listPosts(): Promise<Array<PostResponse>>{
     return await this.postRepository.list();
+  }
+
+  async findPostById(id:number): Promise<PostResponse> {
+    const response = await this.postRepository.findPostById(id);
+
+    if(response === null){
+      throw new Error("Post não encontrado.");
+    }
+
+    return response;
   }
 }

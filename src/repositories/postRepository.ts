@@ -13,4 +13,11 @@ export class PostRepository {
   async list(): Promise<Array<PostResponse>>{
     return await prisma.post.findMany();
   }
+
+  async findPostById(id:number): Promise<PostResponse | null>{
+    return await prisma.post.findUnique({
+      where:{ id }
+    })
+  }
+
 }

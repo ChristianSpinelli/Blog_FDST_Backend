@@ -9,5 +9,6 @@ const postController = new PostController();
 
 router.post('/', authenticateMock(), authorizeRoles(Perfil.professor), postController.create);
 router.get('/', authenticateMock(), authorizeRoles(Perfil.aluno, Perfil.professor), postController.list);
+router.get('/:id', authenticateMock(), authorizeRoles(Perfil.aluno), postController.findPostById);
 
 export default router;

@@ -21,9 +21,21 @@ export class PostController {
 
   async list(req: Request, res: Response, next: NextFunction): Promise<void>{
     try{
-      const posts: Array<PostResponse> = await postService.listPost();
+      const posts: Array<PostResponse> = await postService.listPosts();
 
       res.status(200).json(posts);
+    }catch(error){
+      next(error);
+    }
+  }
+
+  async findPostById(req: Request, res: Response, next: NextFunction): Promise<void>{
+    try{
+      const { id } = req.params;
+
+      const post: PostResponse = await postService.findPostById(Number(id));
+
+      res.status(200).json(post);
     }catch(error){
       next(error);
     }
