@@ -51,4 +51,14 @@ export class PostController {
       next(error);
     }
   }
+
+  async deletePost(req: Request, res:Response, next: NextFunction): Promise<void>{
+    try{
+      const { id } = req.params;
+      await postService.deletePost(Number(id));
+      res.status(200).json("Post apagado com sucesso.");
+    }catch(error){
+      next(error);
+    }
+  }
 }

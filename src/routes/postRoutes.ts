@@ -11,5 +11,6 @@ router.post('/', authenticateMock(), authorizeRoles(Perfil.professor), postContr
 router.get('/', authenticateMock(), authorizeRoles(Perfil.aluno, Perfil.professor), postController.list);
 router.get('/:id', authenticateMock(), authorizeRoles(Perfil.aluno), postController.findPostById);
 router.put('/:id', authenticateMock(), authorizeRoles(Perfil.professor), postController.editPost);
+router.delete('/:id', authenticateMock(), authorizeRoles(Perfil.professor), postController.deletePost);
 
 export default router;

@@ -17,7 +17,7 @@ export class PostRepository {
   async findPostById(id:number): Promise<PostResponse | null>{
     return await prisma.post.findUnique({
       where:{ id }
-    })
+    });
   }
 
   async editPost(post:PostRequest, id:number): Promise<PostResponse>{
@@ -29,7 +29,13 @@ export class PostRepository {
         title:post?.title,
         body:post?.body
       }
-    })
+    });
+  }
+
+  async deletePost(id:number): Promise<PostResponse>{
+    return await prisma.post.delete({
+      where:{ id }
+    });
   }
 
 }
