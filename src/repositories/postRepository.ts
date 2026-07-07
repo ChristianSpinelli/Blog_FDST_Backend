@@ -38,4 +38,15 @@ export class PostRepository {
     });
   }
 
+  async searchPost(search:string): Promise<Array<PostResponse>>{
+    return await prisma.post.findMany({
+      where:{
+        OR:[
+          { title: { contains: search, mode:"insensitive" } },
+          { body: { contains: search, mode:"insensitive" } },
+        ]
+      }
+    });
+  }
+
 }

@@ -45,4 +45,8 @@ export class PostService {
   async deletePost(id:number): Promise<PostResponse>{
     return await this.postRepository.deletePost(id);
   }
+
+  async searchPost(search:string): Promise<Array<PostResponse>>{
+    return await this.postRepository.searchPost(search);
+  }
 }

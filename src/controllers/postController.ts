@@ -7,7 +7,7 @@ const postRepository = new PostRepository();
 const postService = new PostService(postRepository);
 
 export class PostController {
-  async create(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async createPost(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const postRequest: PostRequest = req.body;
       
@@ -19,7 +19,7 @@ export class PostController {
     }
   }
 
-  async list(req: Request, res: Response, next: NextFunction): Promise<void>{
+  async listPosts(req: Request, res: Response, next: NextFunction): Promise<void>{
     try{
       const posts: Array<PostResponse> = await postService.listPosts();
 
@@ -57,6 +57,16 @@ export class PostController {
       const { id } = req.params;
       await postService.deletePost(Number(id));
       res.status(200).json("Post apagado com sucesso.");
+    }catch(error){
+      next(error);
+    }
+  }
+
+  async searchPost(req:Request, res:Response, next:NextFunction): Promise<void>{
+    try{
+      const { search } = req.query;
+      const posts: Array<PostResponse> = await postService.searchPost(search as string);
+      res.status(200).json(posts);
     }catch(error){
       next(error);
     }
