@@ -33,4 +33,12 @@ export class PostService {
 
     return response;
   }
+
+  async editPost(post:PostRequest, id:number){
+    if(post?.title === undefined && post?.body === undefined){
+      throw new Error("É obrigatório informar título ou conteúdo para atualizar.");
+    }
+
+    return await this.postRepository.editPost(post, id);
+  }
 }

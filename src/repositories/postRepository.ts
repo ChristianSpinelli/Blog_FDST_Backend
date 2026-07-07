@@ -20,4 +20,16 @@ export class PostRepository {
     })
   }
 
+  async editPost(post:PostRequest, id:number): Promise<PostResponse>{
+    return await prisma.post.update({
+      where:{
+        id
+      },
+      data:{
+        title:post?.title,
+        body:post?.body
+      }
+    })
+  }
+
 }

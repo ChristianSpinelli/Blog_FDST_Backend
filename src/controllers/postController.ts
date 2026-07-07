@@ -9,13 +9,13 @@ const postService = new PostService(postRepository);
 export class PostController {
   async create(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      const postRequest: PostRequest = req.body as PostRequest;
+      const postRequest: PostRequest = req.body;
       
-      const newPost = await postService.createPost(postRequest);
+      const newPost: PostResponse = await postService.createPost(postRequest);
       
       res.status(201).json(newPost);
     } catch (error) {
-      next(error); // encaminha o erro para o middleware
+      next(error);
     }
   }
 
@@ -36,6 +36,17 @@ export class PostController {
       const post: PostResponse = await postService.findPostById(Number(id));
 
       res.status(200).json(post);
+    }catch(error){
+      next(error);
+    }
+  }
+
+  async editPost(req: Request, res: Response, next: NextFunction): Promise<void>{
+    try{
+       const { id } = req.params;
+       const postRequest: PostRequest = req.body;
+       const post:PostResponse = await postService.editPost(postRequest, Number(id));
+       res.status(200).json(post);
     }catch(error){
       next(error);
     }
