@@ -13,5 +13,20 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
 
+  blog:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - DATABASE_URL=postgresql://c.spin:blog123@db:5432/blog?schema=public
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - DATABASE_URL=postgresql://c.spin:blog123@db:5432/blog?schema=public
+      - PORT=3000
+    depends_on:
+      - db
+
 volumes:
   postgres-data:
