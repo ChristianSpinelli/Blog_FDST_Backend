@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction, RequestHandler } from 'express';
-import { UserService } from '../services/userService';
-import { UserRepository } from '../repositories/userRepository';
+import { UserService } from '../services/user/userService';
+import { UserRepository } from '../repositories/user/userRepository';
 
 const userRepository = new UserRepository();
 const userService = new UserService(userRepository);

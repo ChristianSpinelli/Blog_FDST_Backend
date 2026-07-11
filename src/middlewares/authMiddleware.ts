@@ -1,5 +1,5 @@
 import { NextFunction, Request, RequestHandler, Response } from 'express';
-import { UserResponse } from '../model/user.model';
+import { UserResponse } from '../model/user/user.model';
 
 export const authorizeRoles = (...allowedRoles: string[]): RequestHandler => {
   return (req: Request, res: Response, next: NextFunction): void => {

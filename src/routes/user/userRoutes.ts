@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { UserController } from "../controllers/userController";
-import { authorizeRoles } from "../middlewares/authMiddleware";
-import { Perfil } from "../model/perfil.model";
-import { authenticateMock } from "../middlewares/authMockMiddleware";
+import { UserController } from "../../controllers/user/userController";
+import { authorizeRoles } from "../../middlewares/authMiddleware";
+import { Perfil } from "../../model/utils/perfil.model";
+import { authenticateMock } from "../../middlewares/authMockMiddleware";
 
 const router = Router();
 const userConttoller = new UserController();

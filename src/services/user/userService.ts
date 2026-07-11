@@ -1,5 +1,5 @@
-import { UserRequest, UserResponse } from "../model/user.model";
-import { UserRepository } from "../repositories/userRepository";
+import { UserRequest, UserResponse } from "../../model/user/user.model";
+import { UserRepository } from "../../repositories/user/userRepository";
 
 export class UserService{
     private userRepository: UserRepository;

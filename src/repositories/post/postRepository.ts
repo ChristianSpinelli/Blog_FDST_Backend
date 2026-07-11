@@ -1,5 +1,5 @@
-import { prisma } from '../config/database'; 
-import { PostRequest, PostResponse } from '../model/post.model';
+import { prisma } from '../../config/database'; 
+import { PostRequest, PostResponse } from '../../model/post/post.model';
 
 export class PostRepository {
   async create(data: PostRequest): Promise<PostResponse> {

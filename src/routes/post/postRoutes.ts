@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { PostController } from '../controllers/postController';
-import { authorizeRoles } from '../middlewares/authMiddleware';
-import { Perfil } from '../model/perfil.model';
-import { authenticateMock } from '../middlewares/authMockMiddleware';
+import { PostController } from '../../controllers/post/postController';
+import { authorizeRoles } from '../../middlewares/authMiddleware';
+import { Perfil } from '../../model/utils/perfil.model';
+import { authenticateMock } from '../../middlewares/authMockMiddleware';
 
 const router = Router();
 const postController = new PostController();

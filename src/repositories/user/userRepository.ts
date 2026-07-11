@@ -1,11 +1,12 @@
-import { prisma } from "../config/database";
-import { UserRequest, UserResponse } from "../model/user.model";
+import { prisma } from "../../config/database";
+import { UserRequest, UserResponse } from "../../model/user/user.model";
 
 export class UserRepository{
     async create(data:UserRequest):Promise<UserResponse>{
         return await prisma.user.create({
             data:{ ...data }
         })
+        
     }
 
     async list(): Promise<Array<UserResponse>>{

@@ -1,5 +1,5 @@
-import { PostRequest, PostResponse } from '../model/post.model';
-import { PostRepository } from '../repositories/postRepository';
+import { PostRequest, PostResponse } from '../../model/post/post.model';
+import { PostRepository } from '../../repositories/post/postRepository';
 
 export class PostService {
   private postRepository: PostRepository;

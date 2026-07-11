@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
-import { PostService } from '../services/postService';
-import { PostRepository } from '../repositories/postRepository';
-import { PostRequest, PostResponse } from '../model/post.model';
+import { PostService } from '../../services/post/postService';
+import { PostRepository } from '../../repositories/post/postRepository';
+import { PostRequest, PostResponse } from '../../model/post/post.model';
 
 const postRepository = new PostRepository();
 const postService = new PostService(postRepository);
