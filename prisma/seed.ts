@@ -1,5 +1,8 @@
 import { PrismaClient } from '@prisma/client';
 
+if (!process.env.DATABASE_URL) {
+  process.env.DATABASE_URL = "postgresql://c.spin:blog123@db:5432/blog?schema=public";
+}
 const prisma = new PrismaClient();
 
 async function main() {
