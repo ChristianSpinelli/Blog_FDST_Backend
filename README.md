@@ -82,4 +82,7 @@ Configure a conexão na sua ferramenta com os seguintes dados:
 - Curva de Aprendizado e Adaptação Tecnológica (Node.js & DevOps): Embora eu já possua sólida experiência no desenvolvimento backend utilizando Java, a stack de backend com Node.js era um território novo. Absorver os conceitos de arquitetura do ecossistema JavaScript e aplicá-los seguindo as melhores práticas de mercado foi um processo desafiador, mas gratificante. Adicionalmente, eu não possuía experiência prévia com a criação de esteiras de automação; hoje, finalizo o projeto com um domínio bem definido sobre Dockerfile, Docker Compose, GitHub Actions e suas aplicações práticas no fluxo de CI/CD.
 
 - Otimização e Resiliência no Ambiente de Containers: Configurar a infraestrutura para que o ambiente executasse de forma perfeitamente otimizada exigiu bastante resiliência. O objetivo de automatizar a criação de dados iniciais (seeds) para facilitar a avaliação do professor demandou diversas iterações técnicos até atingir o fluxo ideal. Para validar o comportamento do primeiro boot real, adotei uma rotina rigorosa de testes limpando containers, imagens e volumes antigos a cada build do Dockerfile. Esse processo de refinamento contínuo mitigou problemas de concorrência e inicialização de serviços, gerando um profundo aprendizado prático em DevOps.
+
+### Equipe
+Christian Spinelli RM371199
   
