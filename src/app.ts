@@ -2,6 +2,7 @@ import express from 'express';
 import { errorHandler } from './middlewares/errorMiddleware';
 import postRoutes from './routes/post/postRoutes';
 import userRoutes from './routes/user/userRoutes';
+import loginRoutes from './routes/login/loginRoutes';
 
 const app = express();
 
@@ -15,6 +16,8 @@ app.get('/health', (req, res) => {
 app.use('/posts', postRoutes);
 
 app.use("/users", userRoutes);
+
+app.use("/login", loginRoutes)
 
 //utilizando o middleware de erro
 app.use(errorHandler);
