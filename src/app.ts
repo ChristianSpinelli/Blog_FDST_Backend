@@ -3,8 +3,16 @@ import { errorHandler } from './middlewares/errorMiddleware';
 import postRoutes from './routes/post/postRoutes';
 import userRoutes from './routes/user/userRoutes';
 import loginRoutes from './routes/login/loginRoutes';
+import cors from 'cors';
 
 const app = express();
+
+//liberar o cors para o meu frontend React+Vite
+app.use(cors({
+  origin: 'http://localhost:5173',
+  allowedHeaders: ['Content-Type', 'x-user-username'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+}));
 
 app.use(express.json());
 

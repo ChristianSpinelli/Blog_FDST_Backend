@@ -1,6 +1,6 @@
 {
   "name": "blog_fdst_backend",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Backend do Blog escolar criado em Node para a fase 2 do Tech challenge",
   "main": "index.js",
   "scripts": {
@@ -26,10 +26,12 @@
   "dependencies": {
     "@prisma/adapter-pg": "^7.8.0",
     "@prisma/client": "^7.8.0",
+    "cors": "^2.8.6",
     "express": "^5.2.1",
     "pg": "^8.22.0"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/jest": "^30.0.0",
     "@types/node": "^26.1.1",
