@@ -18,6 +18,11 @@ O projeto foi estruturado integrando ferramentas modernas de desenvolvimento, pe
 * **GitHub Actions (CI/CD):** A ferramenta de Integração Contínua. Configuramos um *workflow* automatizado que dispara a cada `git push` na branch `main`. Ele valida o código, faz o login seguro no registro e prepara o empacotamento da nossa aplicação de forma 100% automatizada.
 * **Docker Hub:** Aplicado como o nosso *Container Registry* (repositório público de imagens). É o destino final da nossa esteira de CI/CD. Uma vez que o GitHub Actions compila e gera a imagem, ela é publicada no Docker Hub com versionamento por Commit (SHA), permitindo que qualquer servidor ou usuário faça o deploy da aplicação instantaneamente sem precisar do código fonte.
 
+Caso já tenha rodadp uma imagem e queira rodar uma nova use o comando:
+  docker compose pull && docker compose up -d
+
+para garantir que o docker não vai usar a imagem salva localmente.
+
 ---
 
 ## 🏛️ Arquitetura do Sistema
