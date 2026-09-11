@@ -12,7 +12,7 @@ export class LoginController{
         try{
             const loginRequest: LoginRequest = req.body;
             const loginResponse: UserResponse = await loginService.login(loginRequest);
-            res.status(201).json(loginResponse);
+            res.status(200).json(loginResponse);
         }catch(error){
             next(error);
         }

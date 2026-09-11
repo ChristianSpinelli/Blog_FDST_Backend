@@ -8,6 +8,13 @@ export class LoginRepository{
             where: {
                 username: data.username,
                 password: data.password
+            },
+             select:{
+                id:true,
+                name:true,
+                username:true,
+                email:true,
+                role:true
             }
         })
     }
