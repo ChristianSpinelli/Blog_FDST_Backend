@@ -8,38 +8,50 @@ export class PostRepository {
         ...data,
         authorId
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
   async list(): Promise<Array<PostResponse>> {
     return await prisma.post.findMany({
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
   async findPostById(id: number): Promise<PostResponse | null> {
     return await prisma.post.findUnique({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
@@ -50,26 +62,34 @@ export class PostRepository {
         title: post?.title,
         body: post?.body
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
   async deletePost(id: number): Promise<PostResponse> {
     return await prisma.post.delete({
       where: { id },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 
@@ -81,13 +101,17 @@ export class PostRepository {
           { body: { contains: search, mode: "insensitive" } },
         ]
       },
-      include: {
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        body: true,
         author: {
           select: {
             name: true,
-          }
-        }
-      }
+          },
+        },
+      },
     });
   }
 }
