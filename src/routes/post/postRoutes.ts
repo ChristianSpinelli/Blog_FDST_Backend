@@ -10,7 +10,7 @@ const postController = new PostController();
 router.post('/', authenticateMock(), authorizeRoles(Perfil.professor), postController.createPost);
 router.get('/', authenticateMock(), authorizeRoles(Perfil.aluno, Perfil.professor), postController.listPosts);
 router.get('/search', authenticateMock(), authorizeRoles(Perfil.aluno, Perfil.professor), postController.searchPost);
-router.get('/:id', authenticateMock(), authorizeRoles(Perfil.aluno), postController.findPostById);
+router.get('/:id', authenticateMock(), authorizeRoles(Perfil.aluno, Perfil.professor), postController.findPostById);
 router.put('/:id', authenticateMock(), authorizeRoles(Perfil.professor), postController.editPost);
 router.delete('/:id', authenticateMock(), authorizeRoles(Perfil.professor), postController.deletePost);
 
