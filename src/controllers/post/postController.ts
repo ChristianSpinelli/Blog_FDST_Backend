@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { PostService } from '../../services/post/postService';
 import { PostRepository } from '../../repositories/post/postRepository';
 import { PostRequest, PostResponse } from '../../model/post/post.model';
+import { UserResponse } from '../../model/user/user.model';
 
 const postRepository = new PostRepository();
 const postService = new PostService(postRepository);
@@ -10,8 +11,9 @@ export class PostController {
   async createPost(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const postRequest: PostRequest = req.body;
+      const user:UserResponse = (req as any).user;
       
-      const newPost: PostResponse = await postService.createPost(postRequest);
+      const newPost: PostResponse = await postService.createPost(postRequest, user.id);
       
       res.status(201).json(newPost);
     } catch (error) {

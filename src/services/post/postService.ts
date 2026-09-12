@@ -8,7 +8,7 @@ export class PostService {
     this.postRepository = postRepository;
   }
 
-  async createPost(data: PostRequest): Promise<PostResponse> {
+  async createPost(data: PostRequest, authorId:number ): Promise<PostResponse> {
     if (!data.title || data.title.trim() === '') {
       throw new Error('O título do post é obrigatório.');
     }
@@ -17,7 +17,7 @@ export class PostService {
       throw new Error('O conteúdo (body) do post é obrigatório.');
     }
 
-    return await this.postRepository.create(data);
+    return await this.postRepository.create(data, authorId);
   }
 
   async listPosts(): Promise<Array<PostResponse>>{
