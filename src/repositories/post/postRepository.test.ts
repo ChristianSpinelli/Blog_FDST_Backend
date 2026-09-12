@@ -22,25 +22,25 @@ describe('PostRepository', () => {
 
   describe('create', () => {
     it('deve chamar o prisma.post.create com os dados corretos', async () => {
-      const inputData: PostRequest = { title: 'Novo Post', body: 'Conteúdo' };
-      const expectedOutput: PostResponse = { id: 1, title: 'Novo Post', body: 'Conteúdo' };
+      const inputData: PostRequest = { title: 'Novo Post', body: 'Conteúdo', description:"descricao" };
+      const expectedOutput: any = { id: 1, title: 'Novo Post', body: 'Conteúdo', description:"descricao", authorId:1, author:{ name:"Professor01"} };
 
       prismaMock.post.create.mockResolvedValue(expectedOutput);
 
-      const result = await postRepository.create(inputData);
+      const result = await postRepository.create(inputData, 1);
 
       expect(result).toEqual(expectedOutput);
       expect(prismaMock.post.create).toHaveBeenCalledWith({
-        data: { ...inputData },
+        data: { ...inputData, authorId: 1 },
       });
     });
   });
 
   describe('list', () => {
     it('deve retornar uma lista de posts cadastrados', async () => {
-      const expectedOutput: PostResponse[] = [
-        { id: 1, title: 'Post 1', body: 'Corpo 1' },
-        { id: 2, title: 'Post 2', body: 'Corpo 2' },
+      const expectedOutput: any[] = [
+        { id: 1, title: 'Post 1', body: 'Corpo 1', description:"descricao 1", author:{name:"Professor01"}},
+        { id: 2, title: 'Post 2', body: 'Corpo 2', description:"descricao 2", author:{name:"Professor01"}},
       ];
 
       prismaMock.post.findMany.mockResolvedValue(expectedOutput);
@@ -54,7 +54,7 @@ describe('PostRepository', () => {
 
   describe('findPostById', () => {
     it('deve retornar um post específico ao passar um ID existente', async () => {
-      const expectedOutput: PostResponse = { id: 5, title: 'Post 5', body: 'Corpo 5' };
+      const expectedOutput: any = { id: 5, title: 'Post 5', body: 'Corpo 5', description:"descricao 1", author:{name:"Professor01"} };
 
       prismaMock.post.findUnique.mockResolvedValue(expectedOutput);
 
@@ -77,8 +77,8 @@ describe('PostRepository', () => {
 
   describe('editPost', () => {
     it('deve chamar o prisma.post.update com o id e payload corretos', async () => {
-      const updateData: PostRequest = { title: 'Título Atualizado', body: 'Corpo Atualizado' };
-      const expectedOutput: PostResponse = { id: 1, title: 'Título Atualizado', body: 'Corpo Atualizado' };
+      const updateData: PostRequest = { title: 'Título Atualizado', body: 'Corpo Atualizado', description:"descricao 1" };
+      const expectedOutput: any = { id: 1, title: 'Título Atualizado', body: 'Corpo Atualizado', description:"descricao 1", author:{name:"Professor01"} };
 
       prismaMock.post.update.mockResolvedValue(expectedOutput);
 
@@ -97,7 +97,7 @@ describe('PostRepository', () => {
 
   describe('deletePost', () => {
     it('deve chamar o prisma.post.delete com o id correto', async () => {
-      const expectedOutput: PostResponse = { id: 2, title: 'Deletado', body: 'Deletado' };
+      const expectedOutput: any = { id: 2, title: 'Deletado', body: 'Deletado', description:"descricao 1", author:{name:"Professor01"} };
 
       prismaMock.post.delete.mockResolvedValue(expectedOutput);
 
@@ -113,7 +113,7 @@ describe('PostRepository', () => {
   describe('searchPost', () => {
     it('deve passar os parâmetros de busca em OR e em modo "insensitive" para o Prisma', async () => {
       const searchTerms = 'TypeScript';
-      const expectedOutput: PostResponse[] = [{ id: 1, title: 'Aulas de TypeScript', body: 'Conteúdo' }];
+      const expectedOutput: any[] = [{ id: 1, title: 'Aulas de TypeScript', body: 'Conteúdo', description:"descricao 1", author:{name:"Professor01"} }];
 
       prismaMock.post.findMany.mockResolvedValue(expectedOutput);
 
