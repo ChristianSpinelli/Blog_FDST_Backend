@@ -17,21 +17,21 @@ describe('PostService', () => {
 
   describe('createPost', () => {
     it('deve criar um post com sucesso se os dados forem válidos', async () => {
-      const inputData = { title: 'Novo Post', body: 'Conteúdo do post' };
-      const expectedOutput: PostResponse = { id: 1, title: 'Novo Post', body: 'Conteúdo do post' };
+      const inputData = { title: 'Novo Post', body: 'Conteúdo do post', description:"descricao" };
+      const expectedOutput: PostResponse = { id: 1, title: 'Novo Post', body: 'Conteúdo do post', description:"descricao", author:{name:"Professor01"} };
 
       postRepositoryMock.create.mockResolvedValue(expectedOutput);
 
-      const result = await postService.createPost(inputData);
+      const result = await postService.createPost(inputData, 1);
 
       expect(result).toEqual(expectedOutput);
       expect(postRepositoryMock.create).toHaveBeenCalledWith(inputData);
     });
 
     it('deve lançar um erro se o título estiver vazio', async () => {
-      const inputData = { title: '   ', body: 'Conteúdo do post' };
+      const inputData = { title: '   ', body: 'Conteúdo do post', description:"descricao" };
 
-      await expect(postService.createPost(inputData)).rejects.toThrow('O título do post é obrigatório.');
+      await expect(postService.createPost(inputData, 1)).rejects.toThrow('O título do post é obrigatório.');
       
       expect(postRepositoryMock.create).not.toHaveBeenCalled();
     });
@@ -39,7 +39,7 @@ describe('PostService', () => {
 
   describe('findPostById', () => {
     it('deve retornar o post caso ele exista no banco', async () => {
-      const mockPost: PostResponse = { id: 10, title: 'Post Existente', body: 'Corpo' };
+      const mockPost: PostResponse = { id: 10, title: 'Post Existente', body: 'Corpo', description:"post", author:{name:"Professor01"} };
       postRepositoryMock.findPostById.mockResolvedValue(mockPost);
 
       const result = await postService.findPostById(10);
@@ -56,7 +56,7 @@ describe('PostService', () => {
 
   describe('editPost', () => {
     it('deve lançar um erro se tentar atualizar sem enviar title e sem enviar body', async () => {
-      const inputData = { title: undefined as any, body: undefined as any };
+      const inputData = { title: undefined as any, body: undefined as any, description: undefined as any };
 
       await expect(postService.editPost(inputData, 1)).rejects.toThrow(
         'É obrigatório informar título ou conteúdo para atualizar.'
@@ -66,7 +66,7 @@ describe('PostService', () => {
 
   describe('searchPost', () => {
     it('deve chamar o repositório repassando o termo de busca corretamente', async () => {
-      const mockLista: PostResponse[] = [{ id: 1, title: 'Aulas de Node', body: 'Express' }];
+      const mockLista: PostResponse[] = [{ id: 1, title: 'Aulas de Node', description:"node", author:{ name:"Professor01" }, body: 'Express' }];
       postRepositoryMock.searchPost.mockResolvedValue(mockLista);
 
       const result = await postService.searchPost('Node');
