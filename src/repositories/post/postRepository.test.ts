@@ -82,7 +82,7 @@ describe('PostRepository', () => {
 
       prismaMock.post.update.mockResolvedValue(expectedOutput);
 
-      const result = await postRepository.editPost(updateData, 1);
+      const result = await postRepository.editPost(updateData, 1, 1);
 
       expect(result).toEqual(expectedOutput);
       expect(prismaMock.post.update).toHaveBeenCalledWith({

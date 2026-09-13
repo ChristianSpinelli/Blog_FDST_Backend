@@ -58,7 +58,7 @@ describe('PostService', () => {
     it('deve lançar um erro se tentar atualizar sem enviar title e sem enviar body', async () => {
       const inputData = { title: undefined as any, body: undefined as any, description: undefined as any };
 
-      await expect(postService.editPost(inputData, 1)).rejects.toThrow(
+      await expect(postService.editPost(inputData, 1, 1)).rejects.toThrow(
         'É obrigatório informar título ou conteúdo para atualizar.'
       );
     });
