@@ -34,12 +34,16 @@ export class PostService {
     return response;
   }
 
-  async editPost(post:PostRequest, id:number): Promise<PostResponse>{
-    if(post?.title === undefined && post?.body === undefined){
-      throw new Error("É obrigatório informar título ou conteúdo para atualizar.");
+  async editPost(post:PostRequest, id:number, authorId:number): Promise<PostResponse>{
+    if(
+      post?.title === undefined && 
+      post?.body === undefined &&
+      post?.description === undefined
+    ){
+      throw new Error("É obrigatório informar ao menos um campo para atualizar o conteúdo.");
     }
 
-    return await this.postRepository.editPost(post, id);
+    return await this.postRepository.editPost(post, id, authorId);
   }
 
   async deletePost(id:number): Promise<PostResponse>{

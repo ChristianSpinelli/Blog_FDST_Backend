@@ -47,7 +47,8 @@ export class PostController {
     try{
        const { id } = req.params;
        const postRequest: PostRequest = req.body;
-       const post:PostResponse = await postService.editPost(postRequest, Number(id));
+       const user:UserResponse = (req as any).user;
+       const post:PostResponse = await postService.editPost(postRequest, Number(id), user.id);
        res.status(200).json(post);
     }catch(error){
       next(error);

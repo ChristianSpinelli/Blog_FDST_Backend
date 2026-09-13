@@ -24,6 +24,9 @@ export class PostRepository {
 
   async list(): Promise<Array<PostResponse>> {
     return await prisma.post.findMany({
+      orderBy:{
+        id:'desc'
+      },
       select: {
         id: true,
         title: true,
@@ -55,12 +58,14 @@ export class PostRepository {
     });
   }
 
-  async editPost(post: PostRequest, id: number): Promise<PostResponse> {
+  async editPost(post: PostRequest, postId: number, authorId:number): Promise<PostResponse> {
     return await prisma.post.update({
-      where: { id },
+      where: { id: postId },
       data: {
         title: post?.title,
-        body: post?.body
+        body: post?.body,
+        description: post?.description,
+        authorId
       },
       select: {
         id: true,
@@ -100,6 +105,9 @@ export class PostRepository {
           { title: { contains: search, mode: "insensitive" } },
           { body: { contains: search, mode: "insensitive" } },
         ]
+      },
+      orderBy:{
+        id:'desc'
       },
       select: {
         id: true,
