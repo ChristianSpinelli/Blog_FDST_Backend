@@ -104,6 +104,8 @@ export class PostRepository {
         OR: [
           { title: { contains: search, mode: "insensitive" } },
           { body: { contains: search, mode: "insensitive" } },
+          { description: { contains: search, mode:"insensitive" }},
+          { author:{ name: { contains: search, mode:"insensitive" }}}
         ]
       },
       orderBy:{
